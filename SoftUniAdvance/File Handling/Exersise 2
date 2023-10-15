@@ -1,0 +1,15 @@
+ith open("text.txt", "r") as file:
+    result = []
+    for row, line in enumerate(file.readlines()):
+        counter_l = 0
+        counter_s = 0
+        for ch in line:
+            if ch.isalpha():
+                counter_l += 1
+            elif ch not in [" ", "\n"]:
+                counter_s += 1
+
+        result.append(f"Line {row}: {line} ({counter_l})({counter_s})")
+
+with open("output.txt", "a") as file_w:
+    file_w.write('\n'.join(result))
