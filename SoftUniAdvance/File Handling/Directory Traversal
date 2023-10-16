@@ -1,7 +1,9 @@
 import os
 
 
-def get_files(folder, files={}):
+def get_files(folder, level, files={}):
+    if level < 0:
+        return files
     for element in os.listdir(folder):
         f = os.path.join(folder, element)
         if os.path.isfile(f):
@@ -10,7 +12,7 @@ def get_files(folder, files={}):
                 files[ext] = []
             files[ext].append(element)
         else:
-            get_files(f)
+            get_files(f, level - 1)
 
     return files
 
