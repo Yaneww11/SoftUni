@@ -1,0 +1,48 @@
+import os
+
+
+def create_file(f_name):
+    open(file_name, "w").close()
+
+
+def add_to_file(f_name, text):
+    with open(f_name, "a") as f:
+        f.write(f"{text}\n")
+
+
+def delete_file(f_name):
+    try:
+        os.remove(f_name)
+    except FileNotFoundError:
+        print("An error occurred")
+
+
+def replace_text_in_file(f_name, *args):
+    try:
+        with open(f_name, "r") as file:
+            content = file.read()
+
+    except FileNotFoundError:
+        print("An error occurred")
+
+    else:
+        with open(file_name, "w") as file:
+            content = content.replace(args[0], args[1])
+            file.write(content)
+
+
+while True:
+    line = input()
+    if line == "End":
+        break
+
+    command, file_name, *args = line.split('-')
+    if command == "Create":
+        create_file(file_name)
+    elif command == "Add":
+        content = args[0]
+        add_to_file(file_name, content)
+    elif command == "Replace":
+        replace_text_in_file(file_name, *args)
+    elif command == "Delete":
+        delete_file(file_name)
