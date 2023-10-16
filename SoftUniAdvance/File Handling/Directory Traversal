@@ -1,0 +1,21 @@
+import os
+
+
+def get_files(folder, files={}):
+    for element in os.listdir(folder):
+        f = os.path.join(folder, element)
+        if os.path.isfile(f):
+            ext = element.split('.')[-1]
+            if ext not in files:
+                files[ext] = []
+            files[ext].append(element)
+        else:
+            get_files(f)
+
+    return files
+
+
+directory = './'
+
+all_files = get_files(directory)
+print(all_files)
