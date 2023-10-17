@@ -113,7 +113,7 @@ print(f"{player_one} starts first")
 
 turn = 1
 
-while True:
+while turn < 10:
     current_player = player_one if turn % 2 else player_two  # turn % 2 == turn % 2 != 0
     current_sign = player_one_sign if turn % 2 else player_two_sign
     try:
@@ -136,3 +136,4 @@ while True:
             print(f"Congratulations {current_player} is a winner")
             break
     turn += 1
+print("DRAW")
