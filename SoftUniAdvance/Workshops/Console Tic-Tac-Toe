@@ -136,4 +136,5 @@ while turn < 10:
             print(f"Congratulations {current_player} is a winner")
             break
     turn += 1
-print("DRAW")
+else:
+    print("DRAW")
