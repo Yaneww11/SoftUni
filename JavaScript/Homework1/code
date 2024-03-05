@@ -1,0 +1,90 @@
+function solve(arr, rotations){
+    for (j = 0; j < rotations; j++){
+        let firstElement = arr.shift();
+        arr.push(firstElement)
+    }
+    console.log(arr.join(" "));
+}
+
+function ex2(arr, step){
+    let result = [];
+    for (let i = 0; i < arr.length; i+= step) {
+        result.push(arr[i]);
+    }
+    return result;
+}
+
+function ex2QuickSolve(arr, step){
+    const result = arr.filter((element, index) => index % step === 0);
+    return result;
+}
+
+function ex3(arr){
+    let sorted_array = arr.sort((a,b) => a.localeCompare(b));
+    arr.forEach((value, index) => console.log(`${index + 1}.${value}`))
+}
+
+function ex4(arr){
+    let sorted_numbers = arr.sort((a,b) => a - b);
+    let result = [];
+    while (sorted_numbers.length !== 0){
+        let min_number = sorted_numbers.shift();
+        result.push(min_number);
+
+        if (sorted_numbers.length === 0){
+            break
+        }
+        let max_num = sorted_numbers.pop();
+        result.push(max_num);
+    }
+    return result;
+}
+
+function ex5(wordsInput, text){
+    const words = wordsInput.split(', ');
+    const matches = text.matchAll(/\*+/g);
+    for (const match of matches){
+        const word = words.find(w => w.length === match[0].length);
+        text = text.replace(match[0], word);
+    }
+    console.log(text);
+}
+
+function ex6(input){
+    const pattern = /#([a-zA-z]+)/g;
+
+    const mathes = input.matchAll(pattern);
+    for (const match of mathes) {
+        console.log(match[1])
+    }
+}
+
+function ex7(word, text){
+    const words = text.toLowerCase().split(' ');
+    const match =  words.includes(word.toLowerCase());
+    if (!match){
+        console.log(`${word} not found!`)
+    }
+    else {
+        console.log(word)
+    }
+}
+
+function ex8(input){
+    const pattern = /([A-Z][a-z]*)/g;
+    let result = input.split(pattern).filter(el => el !== "");
+    console.log(result.join(', '));
+}
+/*
+console.log(ex2QuickSolve(['5', '20', '31', '4', '20'], 2));
+ex3(["John", "bob", "Christina", "Ema"]);
+console.log(ex4([1, 65, 3, 52, 48, 63, 31, -3, 18, 56]));
+ex5('great, learning',
+    'softuni is ***** place for ******** new programming languages *****');
+ex6('The symbol # is known #variously in English-speaking #regions as the #number sign');
+ex7('javascript',
+    'JavaScriptt is the best programming language');
+ */
+
+ex8('HoldTheDoor21');
+
