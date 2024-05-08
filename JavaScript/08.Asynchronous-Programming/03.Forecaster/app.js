@@ -5,6 +5,7 @@ function attachEvents() {
     const submitButton = document.getElementById('submit');
     const forecastElement = document.getElementById('forecast');
     const currentElement = document.getElementById('current');
+    const upcomingElement = document.getElementById('upcoming');
 
     const weatherSymbol = {
         'Sunny': '☀',
@@ -26,9 +27,7 @@ function attachEvents() {
                 ]);
             })
             .then(responses => Promise.all(responses.map(res => res.json())))
-            .then(([today, upcomming]) => {
-                console.log(today);
-                console.log(upcomming);
+            .then(([today, upcommingDays]) => {
                 forecastElement.style.display = 'block';
 
                 const symbolSpanElement = document.createElement('span');
@@ -52,7 +51,7 @@ function attachEvents() {
                 forecastsElement.appendChild(anotherSpan);
 
                 currentElement.appendChild(forecastsElement);
-                
+
                 // Create upcoming
                 const upcomingForecastElement = document.createElement('div');
                 upcomingForecastElement.classList.add('forecast-info')
