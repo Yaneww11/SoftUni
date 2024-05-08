@@ -52,6 +52,33 @@ function attachEvents() {
                 forecastsElement.appendChild(anotherSpan);
 
                 currentElement.appendChild(forecastsElement);
+                
+                // Create upcoming
+                const upcomingForecastElement = document.createElement('div');
+                upcomingForecastElement.classList.add('forecast-info')
+                for (const day of upcommingDays.forecast) {
+                    const upcomingElement = document.createElement('span');
+                    upcomingElement.classList.add('upcoming')
+
+                    const symbolElement = document.createElement('span');
+                    symbolElement.classList.add('symbol');
+                    symbolElement.textContent = weatherSymbol[day.condition];
+
+                    const temperatureElement = document.createElement('span');
+                    temperatureElement.classList.add('forecast-data');
+                    temperatureElement.textContent = `${day.low} / ${day.high}`;
+
+                    const conditionElement = document.createElement('span');
+                    conditionElement.classList.add('forecast-data');
+                    conditionElement.textContent = day.condition;
+
+                    upcomingElement.appendChild(symbolElement);
+                    upcomingElement.appendChild(temperatureElement);
+                    upcomingElement.appendChild(conditionElement);
+
+                    upcomingForecastElement.appendChild(upcomingElement)
+                }
+                upcomingElement.appendChild(upcomingForecastElement);
             })
     });
 
