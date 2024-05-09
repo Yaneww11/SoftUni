@@ -15,70 +15,67 @@ function attachEvents() {
         'Degrees': '°',
     }
 
-    submitButton.addEventListener('click', () => {
-        fetch(`${baseUrl}/locations`)
-            .then(res => res.json())
-            .then(locationData => {
-                const { code } = locationData.find(location => location.name === locationElement.value)
+    submitButton.addEventListener('click', async () => {
+        let locationResponse = await fetch(`${baseUrl}/locations`);
+        let locationData = await locationResponse.json();
+        const { code } = locationData.find(location => location.name === locationElement.value);
 
-                return Promise.all([
-                    fetch(`${baseUrl}/today/${code}`),
-                    fetch(`${baseUrl}/upcoming/${code}`),
-                ]);
-            })
-            .then(responses => Promise.all(responses.map(res => res.json())))
-            .then(([today, upcommingDays]) => {
-                forecastElement.style.display = 'block';
+        let todayResponse = await fetch(`${baseUrl}/today/${code}`);
+        let today = await todayResponse.json();
 
-                const symbolSpanElement = document.createElement('span');
-                symbolSpanElement.classList.add('condition');
-                symbolSpanElement.classList.add('symbol');
-                symbolSpanElement.textContent = weatherSymbol[today.forecast.condition];
+        let upcomingResponse = fetch(`${baseUrl}/upcoming/${code}`);
+        let upcomingDays = await (await upcomingResponse).json();
 
-                // Don't do this at home
-                const anotherSpan = document.createElement('span');
-                anotherSpan.innerHTML = `
-                    <span class="condition">
-                        <span class="forecast-data">${today.name}</span>
-                        <span class="forecast-data">${today.forecast.low}/${today.forecast.high}</span>
-                        <span class="forecast-data">${today.forecast.condition}</span>
-                    </span>
-                `;
+        forecastElement.style.display = 'block';
 
-                const forecastsElement = document.createElement('div');
-                forecastsElement.classList.add('forecasts');
-                forecastsElement.appendChild(symbolSpanElement);
-                forecastsElement.appendChild(anotherSpan);
+        const symbolSpanElement = document.createElement('span');
+        symbolSpanElement.classList.add('condition');
+        symbolSpanElement.classList.add('symbol');
+        symbolSpanElement.textContent = weatherSymbol[today.forecast.condition];
 
-                currentElement.appendChild(forecastsElement);
+        // Don't do this at home
+        const anotherSpan = document.createElement('span');
+        anotherSpan.innerHTML = `
+            <span class="condition">
+                <span class="forecast-data">${today.name}</span>
+                <span class="forecast-data">${today.forecast.low}/${today.forecast.high}</span>
+                <span class="forecast-data">${today.forecast.condition}</span>
+            </span>
+        `;
 
-                // Create upcoming
-                const upcomingForecastElement = document.createElement('div');
-                upcomingForecastElement.classList.add('forecast-info')
-                for (const day of upcommingDays.forecast) {
-                    const upcomingElement = document.createElement('span');
-                    upcomingElement.classList.add('upcoming')
+        const forecastsElement = document.createElement('div');
+        forecastsElement.classList.add('forecasts');
+        forecastsElement.appendChild(symbolSpanElement);
+        forecastsElement.appendChild(anotherSpan);
 
-                    const symbolElement = document.createElement('span');
-                    symbolElement.classList.add('symbol');
-                    symbolElement.textContent = weatherSymbol[day.condition];
+        currentElement.appendChild(forecastsElement);
 
-                    const temperatureElement = document.createElement('span');
-                    temperatureElement.classList.add('forecast-data');
-                    temperatureElement.textContent = `${day.low} / ${day.high}`;
+        // Create upcoming
+        const upcomingForecastElement = document.createElement('div');
+        upcomingForecastElement.classList.add('forecast-info')
+        for (const day of upcomingDays.forecast) {
+            const upcomingElement = document.createElement('span');
+            upcomingElement.classList.add('upcoming')
 
-                    const conditionElement = document.createElement('span');
-                    conditionElement.classList.add('forecast-data');
-                    conditionElement.textContent = day.condition;
+            const symbolElement = document.createElement('span');
+            symbolElement.classList.add('symbol');
+            symbolElement.textContent = weatherSymbol[day.condition];
 
-                    upcomingElement.appendChild(symbolElement);
-                    upcomingElement.appendChild(temperatureElement);
-                    upcomingElement.appendChild(conditionElement);
+            const temperatureElement = document.createElement('span');
+            temperatureElement.classList.add('forecast-data');
+            temperatureElement.textContent = `${day.low} / ${day.high}`;
 
-                    upcomingForecastElement.appendChild(upcomingElement)
-                }
-                upcomingElement.appendChild(upcomingForecastElement);
-            })
+            const conditionElement = document.createElement('span');
+            conditionElement.classList.add('forecast-data');
+            conditionElement.textContent = day.condition;
+
+            upcomingElement.appendChild(symbolElement);
+            upcomingElement.appendChild(temperatureElement);
+            upcomingElement.appendChild(conditionElement);
+
+            upcomingForecastElement.appendChild(upcomingElement)
+        }
+        upcomingElement.appendChild(upcomingForecastElement);
     });
 
 }
