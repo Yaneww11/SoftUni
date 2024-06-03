@@ -1,0 +1,15 @@
+CREATE TABLE minion (
+    PersonID int,
+    LastName varchar(255),
+    FirstName varchar(255),
+    Address varchar(255),
+    City varchar(255)
+);
+
+ALTER TABLE minion
+RENAME TO minions_info;
+
+ALTER TABLE minions_info
+ADD COLUMN code CHAR(4),
+ADD COLUMN task TEXT,
+ADD COLUMN salary NUMERIC(8,3);
