@@ -57,3 +57,20 @@ DROP NOT NULL;
 DROP COLUMN age;
 -- remove all data from table
 TRUNCATE TABLE minions_info;
+-- create type
+CREATE TYPE address AS (
+	street VARCHAR(50),
+	city VARCHAR(50),
+	postalCode CHAR(4)
+);
+
+CREATE TABLE customers (
+	id SERIAL PRIMARY KEY,
+	name VARCHAR(50),
+	customer_address address
+);
+
+INSERT INTO customers(name, customer_address)
+VALUES ('Yane',('some street', 'Radnevo', '200'));
+
+SELECT * FROM customers;
