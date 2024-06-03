@@ -74,3 +74,7 @@ INSERT INTO customers(name, customer_address)
 VALUES ('Yane',('some street', 'Radnevo', '200'));
 
 SELECT * FROM customers;
+-- get data from custom type
+SELECT 
+	(customer_address).street
+FROM customers;
