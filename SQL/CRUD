@@ -73,3 +73,11 @@ SELECT
 	concat(first_name, ' ', last_name) as "Full name",
 	job_title as "Job Title"
 FROM employees as e
+-- insert values
+INSERT INTO employees
+	(first_name, last_name, job_title, department_id, salary)
+VALUES 
+	('Samantha', 'Young', 'Housekeeping', 4, 900),
+	('Roger', 'Palmer', 'Waiter', 3, 928.33);
+
+SELECT * FROM employees;
