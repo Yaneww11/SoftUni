@@ -67,6 +67,7 @@ CREATE TABLE towns (
 	id serial PRIMARY KEY,
 	name VARCHAR(50)	
 );
+
 -- concat and rename 
 SELECT 
 	id,
@@ -81,3 +82,13 @@ VALUES
 	('Roger', 'Palmer', 'Waiter', 3, 928.33);
 
 SELECT * FROM employees;
+
+-- update salary
+UPDATE employees
+SET salary = salary + 100
+WHERE job_title = 'Manager'
+;
+
+SELECT * FROM employees
+WHERE job_title = 'Manager'
+;
