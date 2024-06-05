@@ -1,6 +1,8 @@
 # Lab: Built-in Functions
 
 This document defines the lab exercise assignments for the PostgreSQL course @ Software University. Submit your solutions to the SoftUni Judge System.
+![image](https://github.com/Yaneww11/SoftUni/assets/93374652/bc3ebca0-f3ff-4b3c-85db-0a8e213addc6)
+
 
 ## Exercises
 
