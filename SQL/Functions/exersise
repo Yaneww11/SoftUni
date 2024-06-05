@@ -38,3 +38,8 @@ UPDATE countries
 SET 
 	capital_code = SUBSTRING(capital, 1, 2)
 RETURNING *;
+-- (Descr)iption
+SELECT 
+	SUBSTRING(description, 5)
+FROM
+	currencies;
