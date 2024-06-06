@@ -58,3 +58,15 @@ FROM
 WHERE
 	starts_at - booked_at >= INTERVAL '10 MONTHS'
 ;
+
+-- Use Like
+SELECT
+	companion_full_name,
+	email
+FROM
+	users
+WHERE
+	companion_full_name ILIKE '%aNd%' -- Valid is: and, And, ANd, ...
+		AND
+	email NOT LIKE '%@gmail'
+;
