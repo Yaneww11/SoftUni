@@ -1,0 +1,11 @@
+-- 01
+SELECT 	COUNT(*) FROM wizard_deposits;
+
+-- 02
+SELECT 	SUM(deposit_amount) FROM wizard_deposits;
+
+-- 03
+SELECT 	
+	ROUND(AVG(magic_wand_size), 3) AS magic_wand_size
+FROM 
+	wizard_deposits ;
