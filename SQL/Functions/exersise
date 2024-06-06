@@ -59,3 +59,11 @@ SELECT
 	REPLACE(mountain_range, 'A', '$') AS replace_A
 FROM 
 	mountains;
+
+-- Translate
+SELECT 
+	capital,
+	TRANSLATE(capital, 'áãåçéíñóú', 'aaaceinou') AS translated_name
+FROM 
+	countries
+;
