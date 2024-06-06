@@ -17,3 +17,9 @@ SELECT
 	ROUND(latitude, 2),
 	TRUNC(latitude, 2)
 FROM apartments;
+
+-- Absolute Value
+SELECT 
+	longitude,
+	ABS(longitude)
+FROM apartments;
