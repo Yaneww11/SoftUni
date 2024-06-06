@@ -90,3 +90,11 @@ FROM
 WHERE
 	m.id = p.mountain_id
 ;
+
+-- Convert Int to String and get length
+SELECT
+	population,
+	LENGTH(CAST(population AS VARCHAR)) AS length
+FROM
+	countries
+;
