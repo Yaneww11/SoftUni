@@ -83,3 +83,12 @@ ORDER BY
 	user_count DESC,
 	initials
 ;
+
+-- SUM
+SELECT
+	SUM(booked_for) AS initials
+FROM
+	bookings
+WHERE
+	apartment_id = 90;
+;
