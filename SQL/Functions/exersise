@@ -107,3 +107,9 @@ SELECT
 FROM
 	peaks
 ;
+
+-- Update iso_code
+UPDATE countries
+SET iso_code = UPPER(LEFT(country_name, 3))
+WHERE iso_code IS NULL
+RETURNING *;
