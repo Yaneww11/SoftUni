@@ -7,6 +7,7 @@ SELECT
 FROM
 	rivers
 ORDER BY river_name;
+
 -- Concatenate Geography Data
 CREATE OR REPLACE VIEW 
 	view_continents_countries_currencies_details AS
@@ -28,6 +29,7 @@ WHERE
 ORDER BY 
 	country_information,
 	currencies;
+
 -- Capital Code
 ALTER TABLE 
 	countries
@@ -38,11 +40,19 @@ UPDATE countries
 SET 
 	capital_code = SUBSTRING(capital, 1, 2)
 RETURNING *;
+
 -- (Descr)iption
 SELECT 
 	SUBSTRING(description, 5)
 FROM
-	currencies;
+	currencies
+
+-- Substring River Length
+SELECT 
+	SUBSTRING("River Information", '[0-9]{1,4}') AS river_length
+FROM 
+	view_river_info;
+
 -- Replace A
 SELECT 
 	REPLACE(mountain_range, 'a', '@') AS replace_a,
