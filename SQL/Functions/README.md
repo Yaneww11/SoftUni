@@ -308,3 +308,173 @@ Submit your query for this task in the Judge system.
 | …   | …        |
 | 249 | ZMB      |
 | 250 | ZWE      |
+
+# Booking Database Exercises
+
+To complete the upcoming exercises, it is necessary to create a new database named `booking_db` and open its query tool. Download the `03-Exercises-Built-in-Functions-booking_db.sql` file from the course instance and import it into the query tab of your database. After importing, execute the queries in the file. Use the schema and tables available in the `booking_db` database for the tasks that follow.
+
+## Exercise List
+
+### 18. Arithmetical Operators
+Apply mathematical operators in SQL. Create a fresh table named `bookings_calculation` by selecting the `booked_for` values from the `bookings` table where the `apartment_id` equals 93. The `booked_for` column signifies the number of nights the apartment is booked.
+
+Next, alter the table by adding two new columns:
+- `multiplication` column with a NUMERIC data type
+- `modulo` column, also of NUMERIC data type
+
+Calculate the earnings earned by the owner for each night:
+- Populate the `multiplication` column by multiplying the `booked_for` values by 50
+- Fill the `modulo` column with values representing the remainder when `booked_for` is divided by 50
+
+Submit your query for this task in the Judge system.
+
+Example:
+
+| booked_for | multiplication | modulo |
+|------------|----------------|--------|
+| 9          | 450            | 9      |
+| 3          | 150            | 3      |
+| 9          | 450            | 9      |
+| 10         | 500            | 10     |
+| 1          | 50             | 1      |
+| 9          | 450            | 9      |
+
+### 19. ROUND vs TRUNC
+Create a SQL query that retrieves the `latitude` column from the `apartments` table. Apply the `ROUND()` function to it with a precision of 2 decimal places, and then apply the `TRUNC()` function with the same precision. Compare and measure the differences in the output produced by the two functions.
+
+Submit your query for this task in the Judge system.
+
+Example:
+
+| latitude  | round | trunc |
+|-----------|-------|-------|
+| 38.1941   | 38.19 | 38.19 |
+| 5.9271    | 5.93  | 5.92  |
+| -10.6776  | -10.68| -10.67|
+| 82.1055   | 82.11 | 82.10 |
+| -32.5269  | -32.53| -32.52|
+| …         | …     | …     |
+| 41.7393   | 41.74 | 41.73 |
+| -67.5961  | -67.60| -67.59|
+
+### 20. Absolute Value
+Write an SQL query to select the `longitude` column from the `apartments` table and apply the `ABS()` function to it to find its absolute value.
+
+Submit your query for this task in the Judge system.
+
+Example:
+
+| longitude | abs      |
+|-----------|----------|
+| 58.3150   | 58.3150  |
+| -95.1855  | 95.1855  |
+| -105.1542 | 105.1542 |
+| -142.8697 | 142.8697 |
+| 45.3129   | 45.3129  |
+| …         | …        |
+| -57.1891  | 57.1891  |
+| -96.6056  | 96.6056  |
+
+### 21. Billing Day
+To generate payment documents for reservations made for apartments, follow these steps:
+- Add a new column to the `bookings` table called `billing_day` with the data type of `TIMESTAMPTZ` and set its default value to `CURRENT_TIMESTAMP`
+- Create a SQL query that retrieves the `billing_day` column from the `bookings` table and formats it as `DD 'Day' MM 'Month' YYYY 'Year' HH24:MI:SS`, naming the resulting column `Billing Day`.
+
+Example:
+
+| …                     | billing_day                  | Billing Day                         |
+|-----------------------|------------------------------|-------------------------------------|
+| 2023-07-17 23:15:59.3749+03 | 2023-07-17 23:15:59.3749+03 | 17 Day 07 Month 2023 Year 23:15:59  |
+| 2023-07-17 23:15:59.3749+03 | 2023-07-17 23:15:59.3749+03 | 17 Day 07 Month 2023 Year 23:15:59  |
+| …                     | …                            | …                                   |
+
+### 22. EXTRACT Booked At
+Create a SQL query to retrieve the YEAR, MONTH, DAY, HOUR, MINUTE, and SECOND values from the `booked_at` column. Use the `CEILING()` function to round up the SECOND value to the nearest whole number. Use the `AT TIME ZONE` function to convert the timestamp to the UTC time zone before extracting the hour for consistency.
+
+Submit your query for this task in the Judge system.
+
+Example:
+
+| YEAR | MONTH | DAY | HOUR | MINUTE | SECOND |
+|------|-------|-----|------|--------|--------|
+| 2021 | 10    | 16  | 8    | 8      | 60     |
+| 2022 | 10    | 17  | 12   | 31     | 6      |
+| 2023 | 10    | 15  | 0    | 16     | 45     |
+| 2021 | 1     | 10  | 3    | 25     | 38     |
+| 2020 | 5     | 17  | 20   | 1      | 3      |
+| …    | …     | …   | …    | …      | …      |
+| 2021 | 1     | 18  | 11   | 58     | 37     |
+| 2021 | 4     | 18  | 12   | 50     | 35     |
+
+### 23. Early Birds
+Compose a SQL query to determine the `user_id` of customers who prefer booking 10 months in advance by computing the time difference between the `starts_at` and `booked_at` columns in the `bookings` table. Store the resultant values in a new column named `Early Birds`. Apply a filter to select rows where the `early_birds` value is greater than or equal to 10 months, and retrieve the corresponding `user_id`.
+
+Example:
+
+| user_id | early_birds                     |
+|---------|---------------------------------|
+| 63      | 10 mons 8 days 19:30:20.531     |
+| 53      | 10 mons 1 day 00:35:07.551      |
+| 18      | 10 mons 12:26:33.623            |
+| 22      | 10 mons 03:34:53.748            |
+| …       | …                               |
+| 7       | 10 mons 1 day 03:56:17.546      |
+| 18      | 10 mons 12:26:33.623            |
+
+### 24. Match or Not
+Retrieve the `companion_full_name` and `email` columns from the `users` table where:
+- The `companion_full_name` column contains the substring `%aNd%` in a case-insensitive manner
+- The `email` column does NOT contain the substring `%@gmail` in a case-sensitive manner
+
+Submit your query for this task in the Judge system.
+
+Example:
+
+| companion_full_name   | email                      |
+|-----------------------|----------------------------|
+| Ms. Brandy Rice       | Rosalind_Hudson@hotmail.com|
+| Terrell Blanda IV     | Macie87@hotmail.com        |
+| Andrew Gottlieb PhD   | Alfred.Purdy2@gmail.com    |
+| Sandra Langosh        | Thalia_Wehner78@gmail.com  |
+
+### 25. COUNT by Initial
+Generate a report displaying the user count grouped by their initials. Select the initial two characters from the `first_name` column of the `users` table and store them in a new column named `initials`. Use the `GROUP BY` clause to group users by their initials and the `COUNT()` function to retrieve the number of users in each group. Name the resulting column `user_count`. Arrange the resulting data in descending order according to the `user_count` column. For multiple groups with the same count, sort them alphabetically based on their `initials`.
+
+Submit your query for this task in the Judge system.
+
+Example:
+
+| initials | user_count |
+|----------|------------|
+| Ar       | 7          |
+| Ma       | 7          |
+| Ja       | 5          |
+| El       | 4          |
+| …        | …          |
+| Ab       | 3          |
+| …        | …          |
+| Vl       | 1          |
+| Wi       | 1          |
+
+### 26. SUM
+Calculate the total value of bookings for the apartment by retrieving the `booked_for` column from the `bookings` table and applying the `SUM()` function to it. Add a filter to select only the rows where the `apartment_id` is equal to 90.
+
+Submit your query for this task in the Judge system.
+
+Example:
+
+| total_value |
+|-------------|
+| 50          |
+
+### 27. Average Value
+Create an SQL query that utilizes the `AVG()` function to calculate the average value of the `multiplication` column in the `bookings_calculation` table.
+
+Submit your query for this task in the Judge system.
+
+Example:
+
+| average_value             |
+|---------------------------|
+| 341.6666666666666667      |
+
