@@ -113,3 +113,18 @@ UPDATE countries
 SET iso_code = UPPER(LEFT(country_name, 3))
 WHERE iso_code IS NULL
 RETURNING *;
+
+-- Elevation --->> Peak Name
+SELECT 
+	CONCAT_WS(
+		' ', 
+		elevation,
+		REPEAT('-', 3) || REPEAT('>', 2),
+		peak_name
+	) AS "Elevation --->> Peak Name"
+FROM
+	peaks
+WHERE elevation >= 4884 
+;
+
+
