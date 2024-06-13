@@ -51,3 +51,12 @@ GROUP BY
 ORDER BY
 	deposit_group DESC, is_deposit_expired
 ;
+ -- 09
+SELECT 
+	last_name,
+	count(notes)
+FROM 
+	wizard_deposits
+WHERE
+	notes LIKE '%Dumbledore%'
+GROUP BY last_name;
