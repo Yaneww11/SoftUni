@@ -12,3 +12,9 @@ VALUES
 
 ALTER TABLE products
 ADD COLUMN id SERIAL PRIMARY KEY;
+
+-- 02 
+ALTER TABLE
+	products
+DROP CONSTRAINT
+	products_pkey;
