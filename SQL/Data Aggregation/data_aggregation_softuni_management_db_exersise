@@ -1,4 +1,4 @@
--- 01 
+-- 13
 SELECT 
 	count(CASE department_id WHEN 1 THEN 1 end) as "Engineering",
 	count(CASE department_id WHEN 2 THEN 1 end) as "Tool Design",
@@ -10,7 +10,7 @@ SELECT
 FROM employees
 	;
 
--- 02 
+-- 14 
 UPDATE employees
 SET salary =
 	CASE
@@ -25,4 +25,29 @@ job_title =
 		ELSE job_title
 	END
 RETURNING *
+;
+
+-- 15
+SELECT 
+	job_title,
+	CASE
+		WHEN AVG(salary) > 45800 THEN 'Good'
+		WHEN AVG(salary) BETWEEN 27500 AND 45800 THEN 'Medium'
+		ELSE 'Need Improvement'
+	END AS category
+FROM employees
+GROUP BY job_title
+ORDER BY category, job_title
+;
+
+-- 16
+SELECT 
+	project_name,
+	CASE
+		WHEN start_date IS NULL AND end_date IS NULL THEN 'Ready for development'
+		WHEN start_date IS NOT NULL AND end_date IS  NULL THEN 'In Progres'
+		ELSE 'Done'
+	END
+FROM projects
+WHERE project_name LIKE '%Mountain%'
 ;
